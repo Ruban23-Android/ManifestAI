@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
@@ -81,15 +82,38 @@ fun ScoreRing(score: Int, size: Dp = 120.dp, strokeWidth: Dp = 10.dp, color: Col
     )
     Box(contentAlignment = Alignment.Center, modifier = Modifier.size(size)) {
         Canvas(modifier = Modifier.size(size)) {
-            val stroke = strokeWidth.toPx()
-            val radius = (this.size.minDimension - stroke) / 2
-            val arcSize = androidx.compose.ui.geometry.Size(radius * 2, radius * 2)
-            val topLeft = Offset(stroke / 2, stroke / 2)
-            drawArc(color.copy(alpha = 0.2f), -90f, 360f, false, Stroke(stroke), topLeft, arcSize)
-            drawArc(color, -90f, 360f * animatedScore / 100f, false, Stroke(stroke, cap = StrokeCap.Round), topLeft, arcSize)
+            val stroke  = strokeWidth.toPx()
+            val diameter = this.size.minDimension - stroke
+            val arcSize = Size(diameter, diameter)
+            val topLeft = Offset(stroke / 2f, stroke / 2f)
+
+            // Background track
+            drawArc(
+                color      = color.copy(alpha = 0.2f),
+                startAngle = -90f,
+                sweepAngle = 360f,
+                useCenter  = false,
+                topLeft    = topLeft,
+                size       = arcSize,
+                style      = Stroke(width = stroke),
+            )
+            // Progress arc
+            drawArc(
+                color      = color,
+                startAngle = -90f,
+                sweepAngle = 360f * animatedScore / 100f,
+                useCenter  = false,
+                topLeft    = topLeft,
+                size       = arcSize,
+                style      = Stroke(width = stroke, cap = StrokeCap.Round),
+            )
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("$animatedScore", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold), color = color)
+            Text(
+                "$animatedScore",
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                color = color,
+            )
             Text("/ 100", style = MaterialTheme.typography.labelSmall, color = SubtleText)
         }
     }
