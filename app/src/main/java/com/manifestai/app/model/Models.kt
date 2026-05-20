@@ -1,7 +1,5 @@
 package com.manifestai.app.model
 
-// ── Enums ─────────────────────────────────────────────────────────────────────
-
 enum class BeliefSystem(val label: String, val emoji: String) {
     HINDUISM("Hinduism", "🕉️"),
     ISLAM("Islam", "☪️"),
@@ -34,15 +32,13 @@ enum class ActionType(val label: String) {
     IDENTITY("Identity step"),
 }
 
-// ── Data Classes ──────────────────────────────────────────────────────────────
-
 data class Manifestation(
     val id: String,
     val title: String,
     val category: ManifestCategory,
     val intention: String,
     val milestones: List<String> = emptyList(),
-    val alignmentScore: Int = 0,      // 0-100
+    val alignmentScore: Int = 0,
 )
 
 data class DailyAction(
@@ -62,57 +58,33 @@ data class HabitEntry(
 )
 
 data class AlignmentScore(
-    val total: Int,               // 0-100
+    val total: Int,
     val actionStrength: Int,
     val habitRhythm: Int,
     val reflectionDepth: Int,
     val clarityStructure: Int,
 )
 
-data class JournalEntry(
-    val id: String,
-    val date: String,
-    val morningIntention: String = "",
-    val eveningReflection: String = "",
-)
-
-// ── Sample / Seed Data ────────────────────────────────────────────────────────
-
 object SampleData {
     val manifestations = listOf(
-        Manifestation(
-            id = "1",
-            title = "Financial Freedom",
-            category = ManifestCategory.WEALTH,
-            intention = "Build ₹10L emergency fund and invest consistently",
-            milestones = listOf("Save ₹1L", "Invest in mutual funds", "Build ₹5L fund"),
-            alignmentScore = 72,
-        ),
-        Manifestation(
-            id = "2",
-            title = "Vibrant Health",
-            category = ManifestCategory.HEALTH,
-            intention = "Run a 5K and maintain a balanced diet",
-            milestones = listOf("Run 1K without stopping", "30-day clean eating", "Complete 5K"),
-            alignmentScore = 55,
-        ),
-        Manifestation(
-            id = "3",
-            title = "Creative Mastery",
-            category = ManifestCategory.LEARNING,
-            intention = "Publish my first digital art collection",
-            milestones = listOf("Complete 10 artworks", "Build portfolio site", "Launch on Gumroad"),
-            alignmentScore = 40,
-        ),
+        Manifestation("1", "Financial Freedom", ManifestCategory.WEALTH,
+            "Build ₹10L emergency fund and invest consistently",
+            listOf("Save ₹1L", "Invest in mutual funds", "Build ₹5L fund"), 72),
+        Manifestation("2", "Vibrant Health", ManifestCategory.HEALTH,
+            "Run a 5K and maintain a balanced diet",
+            listOf("Run 1K without stopping", "30-day clean eating", "Complete 5K"), 55),
+        Manifestation("3", "Creative Mastery", ManifestCategory.LEARNING,
+            "Publish my first digital art collection",
+            listOf("Complete 10 artworks", "Build portfolio site", "Launch on Gumroad"), 40),
     )
 
     val todayActions = listOf(
-        DailyAction("a1", "Meditate for 10 minutes",       ActionType.MICRO_HABIT,  "2", durationMinutes = 10),
-        DailyAction("a2", "Review investment portfolio",    ActionType.BEHAVIORAL,   "1", durationMinutes = 5),
-        DailyAction("a3", "Sketch one page in sketchbook",  ActionType.SKILL_REP,    "3", durationMinutes = 20),
-        DailyAction("a4", "Affirm: I am growing stronger",  ActionType.IDENTITY,     "2"),
-        DailyAction("a5", "Walk 3,000 steps",               ActionType.MICRO_HABIT,  "2", durationMinutes = 30, isCompleted = true),
-        DailyAction("a6", "Read 10 pages of finance book",  ActionType.SKILL_REP,    "1", durationMinutes = 15, isCompleted = true),
+        DailyAction("a1", "Meditate for 10 minutes",      ActionType.MICRO_HABIT,  "2", durationMinutes = 10),
+        DailyAction("a2", "Review investment portfolio",   ActionType.BEHAVIORAL,   "1", durationMinutes = 5),
+        DailyAction("a3", "Sketch one page in sketchbook", ActionType.SKILL_REP,   "3", durationMinutes = 20),
+        DailyAction("a4", "Affirm: I am growing stronger", ActionType.IDENTITY,    "2"),
+        DailyAction("a5", "Walk 3,000 steps",              ActionType.MICRO_HABIT,  "2", durationMinutes = 30, isCompleted = true),
+        DailyAction("a6", "Read 10 pages of finance book", ActionType.SKILL_REP,   "1", durationMinutes = 15, isCompleted = true),
     )
 
     val habits = listOf(
@@ -123,11 +95,7 @@ object SampleData {
     )
 
     val alignmentScore = AlignmentScore(
-        total            = 68,
-        actionStrength   = 75,
-        habitRhythm      = 80,
-        reflectionDepth  = 50,
-        clarityStructure = 65,
+        total = 68, actionStrength = 75, habitRhythm = 80, reflectionDepth = 50, clarityStructure = 65
     )
 
     val affirmations = mapOf(

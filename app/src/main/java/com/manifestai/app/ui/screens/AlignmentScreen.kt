@@ -18,29 +18,15 @@ fun AlignmentScreen(viewModel: ManifestViewModel, onBack: () -> Unit) {
     val score = state.alignmentScore
 
     GradientBackground {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .statusBarsPadding()
-                .navigationBarsPadding(),
-        ) {
+        Column(modifier = Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding()) {
             ManifestTopBar("📊 Alignment Score", onBack)
-
             Column(
-                modifier            = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 24.dp),
+                modifier            = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Spacer(Modifier.height(12.dp))
-
-                // Big ring
                 GlassCard(modifier = Modifier.fillMaxWidth()) {
-                    Column(
-                        modifier            = Modifier.padding(24.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
+                    Column(modifier = Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                         ScoreRing(score = score.total, size = 140.dp, strokeWidth = 12.dp)
                         Spacer(Modifier.height(16.dp))
                         Text(
@@ -50,61 +36,42 @@ fun AlignmentScreen(viewModel: ManifestViewModel, onBack: () -> Unit) {
                                 score.total >= 40 -> "Building consistency 🌱"
                                 else              -> "Just getting started 💪"
                             },
-                            style     = MaterialTheme.typography.titleMedium,
-                            color     = OnDark,
+                            style = MaterialTheme.typography.titleMedium,
+                            color = OnDark,
                             textAlign = TextAlign.Center,
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
                             "Behavioral alignment — not outcome prediction",
-                            style     = MaterialTheme.typography.bodyMedium,
-                            color     = SubtleText,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = SubtleText,
                             textAlign = TextAlign.Center,
                         )
                     }
                 }
-
                 Spacer(Modifier.height(24.dp))
-
-                // Component breakdown
                 Text("Score Breakdown", style = MaterialTheme.typography.titleMedium, color = OnDark)
                 Spacer(Modifier.height(16.dp))
-
                 GlassCard(modifier = Modifier.fillMaxWidth()) {
-                    Column(
-                        modifier              = Modifier.padding(20.dp),
-                        verticalArrangement   = Arrangement.spacedBy(18.dp),
-                    ) {
+                    Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
                         LabeledProgressBar("⚡ Action Strength",   score.actionStrength,   AuroraMint)
                         LabeledProgressBar("🔥 Habit Rhythm",      score.habitRhythm,      StarGold)
                         LabeledProgressBar("📓 Reflection Depth",  score.reflectionDepth,  SoftLavender)
                         LabeledProgressBar("🎯 Clarity Structure", score.clarityStructure, CosmicPurple)
                     }
                 }
-
                 Spacer(Modifier.height(24.dp))
-
-                // Explanation card
                 GlassCard(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text("How it works", style = MaterialTheme.typography.titleMedium, color = OnDark)
-                        ScoreExplainerRow("⚡ Action Strength",   "Completion of planned daily actions")
-                        ScoreExplainerRow("🔥 Habit Rhythm",      "Stability of your supportive habits")
-                        ScoreExplainerRow("📓 Reflection Depth",  "Quality of journaling & evening reflections")
-                        ScoreExplainerRow("🎯 Clarity Structure", "Quality of intentions, milestones & planning")
+                        Row { Text("⚡ Action Strength   ", style = MaterialTheme.typography.labelLarge, color = OnDark); Text("Completion of planned daily actions", style = MaterialTheme.typography.bodyMedium, color = SubtleText) }
+                        Row { Text("🔥 Habit Rhythm      ", style = MaterialTheme.typography.labelLarge, color = OnDark); Text("Stability of your supportive habits", style = MaterialTheme.typography.bodyMedium, color = SubtleText) }
+                        Row { Text("📓 Reflection Depth  ", style = MaterialTheme.typography.labelLarge, color = OnDark); Text("Quality of journaling & evening reflections", style = MaterialTheme.typography.bodyMedium, color = SubtleText) }
+                        Row { Text("🎯 Clarity Structure ", style = MaterialTheme.typography.labelLarge, color = OnDark); Text("Quality of intentions, milestones & planning", style = MaterialTheme.typography.bodyMedium, color = SubtleText) }
                     }
                 }
-
                 Spacer(Modifier.height(32.dp))
             }
         }
-    }
-}
-
-@Composable
-private fun ScoreExplainerRow(label: String, description: String) {
-    Row(verticalAlignment = Alignment.Top) {
-        Text(label,       style = MaterialTheme.typography.labelLarge, color = OnDark,    modifier = Modifier.width(160.dp))
-        Text(description, style = MaterialTheme.typography.bodyMedium, color = SubtleText)
     }
 }
