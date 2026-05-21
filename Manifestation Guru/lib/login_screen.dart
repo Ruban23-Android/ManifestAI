@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manifestation_guru/bottom_nav_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -150,7 +151,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 60,
 
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BottomNavScreen(),
+                          ),
+                        );
+                      },
 
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff4BE37B),

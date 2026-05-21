@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manifestation_guru/login_screen.dart';
 import 'package:manifestation_guru/register_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -117,6 +118,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   TextButton(
                     onPressed: () {
                       _controller.jumpToPage(onboardingData.length - 1);
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                      );
                     },
                     child: const Text(
                       "Skip",

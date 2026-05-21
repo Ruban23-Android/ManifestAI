@@ -28,7 +28,7 @@ class VisionBoardPage extends StatelessWidget {
 
       {
         "title": "Business Success",
-        "subtitle": "Build successful startup",
+        "subtitle": "Grow your business",
         "icon": Icons.business_center,
       },
     ];
@@ -86,8 +86,8 @@ class VisionBoardPage extends StatelessWidget {
               children: [
 
                 Container(
-                  height: 60,
-                  width: 60,
+                  height: 58,
+                  width: 58,
 
                   decoration: BoxDecoration(
                     color: const Color(0xff4BE37B)
@@ -100,7 +100,7 @@ class VisionBoardPage extends StatelessWidget {
                   child: Icon(
                     item["icon"],
                     color: const Color(0xff4BE37B),
-                    size: 32,
+                    size: 30,
                   ),
                 ),
 
@@ -108,20 +108,27 @@ class VisionBoardPage extends StatelessWidget {
 
                 Text(
                   item["title"],
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    height: 1.3,
                   ),
                 ),
 
-                const SizedBox(height: 8),
+                const SizedBox(height: 10),
 
                 Text(
                   item["subtitle"],
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+
                   style: const TextStyle(
                     color: Colors.white60,
-                    fontSize: 14,
+                    fontSize: 13,
                     height: 1.5,
                   ),
                 ),
