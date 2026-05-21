@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'vision_board_page.dart';
+import 'my_progress_page.dart';
+import 'settings_page.dart';
+import 'login_screen.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -7,7 +11,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: const Color(0xff0F172A),
+      backgroundColor: const Color(0xff0B1120),
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -18,26 +22,42 @@ class ProfilePage extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              const CircleAvatar(
-                radius: 60,
-                backgroundImage: NetworkImage(
-                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+              /// PROFILE IMAGE
+              Container(
+                padding: const EdgeInsets.all(4),
+
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+
+                  border: Border.all(
+                    color: const Color(0xff4BE37B),
+                    width: 2,
+                  ),
+                ),
+
+                child: const CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(
+                    "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+                  ),
                 ),
               ),
 
               const SizedBox(height: 20),
 
+              /// NAME
               const Text(
                 "Jane Dow",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 30,
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
               const SizedBox(height: 8),
 
+              /// SUBTITLE
               const Text(
                 "Manifestation Explorer ✨",
                 style: TextStyle(
@@ -48,24 +68,164 @@ class ProfilePage extends StatelessWidget {
 
               const SizedBox(height: 35),
 
+              /// VISION BOARD
               profileTile(
+                context: context,
+
                 icon: Icons.favorite,
                 title: "Vision Board",
+
+                onTap: () {
+
+                  Navigator.push(
+                    context,
+
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const VisionBoardPage(),
+                    ),
+                  );
+                },
               ),
 
+              /// MY PROGRESS
               profileTile(
+                context: context,
+
                 icon: Icons.bar_chart,
                 title: "My Progress",
+
+                onTap: () {
+
+                  Navigator.push(
+                    context,
+
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const MyProgressPage(),
+                    ),
+                  );
+                },
               ),
 
+              /// SETTINGS
               profileTile(
+                context: context,
+
                 icon: Icons.settings,
                 title: "Settings",
+
+                onTap: () {
+
+                  Navigator.push(
+                    context,
+
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const SettingsPage(),
+                    ),
+                  );
+                },
               ),
 
+              /// LOGOUT
               profileTile(
+                context: context,
+
                 icon: Icons.logout,
                 title: "Logout",
+
+                onTap: () {
+
+                  showDialog(
+                    context: context,
+
+                    builder: (context) {
+
+                      return AlertDialog(
+                        backgroundColor:
+                        const Color(0xff111827),
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                          BorderRadius.circular(24),
+                        ),
+
+                        title: const Text(
+                          "Logout",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight:
+                            FontWeight.bold,
+                          ),
+                        ),
+
+                        content: const Text(
+                          "Are you sure want to logout?",
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 16,
+                          ),
+                        ),
+
+                        actions: [
+
+                          /// CANCEL
+                          TextButton(
+                            onPressed: () {
+
+                              Navigator.pop(
+                                  context);
+                            },
+
+                            child: const Text(
+                              "Cancel",
+                              style: TextStyle(
+                                color:
+                                Colors.white70,
+                              ),
+                            ),
+                          ),
+
+                          /// LOGOUT
+                          ElevatedButton(
+                            style:
+                            ElevatedButton
+                                .styleFrom(
+                              backgroundColor:
+                              const Color(
+                                  0xff4BE37B),
+                            ),
+
+                            onPressed: () {
+
+                              Navigator.pop(
+                                  context);
+
+                              Navigator.pushReplacement(
+                                context,
+
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) =>
+                                  const LoginScreen(),
+                                ),
+                              );
+                            },
+
+                            child: const Text(
+                              "Logout",
+                              style: TextStyle(
+                                color:
+                                Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
               ),
             ],
           ),
@@ -74,60 +234,76 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  /// PROFILE TILE
   Widget profileTile({
+    required BuildContext context,
     required IconData icon,
     required String title,
+    required VoidCallback onTap,
   }) {
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 18),
-      padding: const EdgeInsets.all(18),
+    return GestureDetector(
 
-      decoration: BoxDecoration(
-        color: const Color(0xff1E293B),
-        borderRadius: BorderRadius.circular(22),
-      ),
+      onTap: onTap,
 
-      child: Row(
-        children: [
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 18),
+        padding: const EdgeInsets.all(18),
 
-          Container(
-            height: 50,
-            width: 50,
+        decoration: BoxDecoration(
+          color: const Color(0xff111827),
 
-            decoration: BoxDecoration(
-              color:
-              const Color(0xff4BE37B).withOpacity(0.15),
+          borderRadius: BorderRadius.circular(24),
 
-              borderRadius:
-              BorderRadius.circular(16),
-            ),
-
-            child: Icon(
-              icon,
-              color: const Color(0xff4BE37B),
-            ),
+          border: Border.all(
+            color: Colors.white10,
           ),
+        ),
 
-          const SizedBox(width: 18),
+        child: Row(
+          children: [
 
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+            /// ICON
+            Container(
+              height: 55,
+              width: 55,
+
+              decoration: BoxDecoration(
+                color: const Color(0xff4BE37B)
+                    .withOpacity(0.15),
+
+                borderRadius:
+                BorderRadius.circular(18),
+              ),
+
+              child: Icon(
+                icon,
+                color: const Color(0xff4BE37B),
               ),
             ),
-          ),
 
-          const Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white54,
-            size: 18,
-          ),
-        ],
+            const SizedBox(width: 18),
+
+            /// TITLE
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 19,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+
+            /// ARROW
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white54,
+              size: 18,
+            ),
+          ],
+        ),
       ),
     );
   }
