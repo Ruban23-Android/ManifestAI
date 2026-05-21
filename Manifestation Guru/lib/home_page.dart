@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'vision_board_page.dart';
+import 'my_progress_page.dart';
+import 'settings_page.dart';
+import 'wealth_page.dart';
+import 'health_page.dart';
+import 'love_page.dart';
+import 'career_page.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -213,27 +221,35 @@ class HomePage extends StatelessWidget {
                 children: [
 
                   manifestCard(
+                    context: context,
                     icon: Icons.attach_money,
                     title: "Wealth",
                     subtitle: "Financial Growth",
+                    page: const WealthPage(),
                   ),
 
                   manifestCard(
+                    context: context,
                     icon: Icons.favorite,
                     title: "Love",
                     subtitle: "Healthy Relationships",
+                    page: const LovePage(),
                   ),
 
                   manifestCard(
+                    context: context,
                     icon: Icons.health_and_safety,
                     title: "Health",
                     subtitle: "Mind & Body",
+                    page: const HealthPage(),
                   ),
 
                   manifestCard(
+                    context: context,
                     icon: Icons.work,
                     title: "Career",
                     subtitle: "Professional Success",
+                    page: const CareerPage(),
                   ),
                 ],
               ),
@@ -253,24 +269,27 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
 
               challengeTile(
+                context: context,
                 icon: Icons.check_circle,
                 title: "Morning Affirmation",
-                subtitle:
-                "Repeat 5 positive affirmations",
+                subtitle: "Repeat 5 positive affirmations",
+                page: const VisionBoardPage(),
               ),
 
               challengeTile(
+                context: context,
                 icon: Icons.psychology,
                 title: "Visualization Session",
-                subtitle:
-                "Visualize your dream future",
+                subtitle: "Visualize your dream future",
+                page: const MyProgressPage(),
               ),
 
               challengeTile(
+                context: context,
                 icon: Icons.menu_book,
                 title: "Gratitude Journal",
-                subtitle:
-                "Write 3 things you are grateful for",
+                subtitle: "Write 3 things you are grateful for",
+                page: const SettingsPage(),
               ),
 
               const SizedBox(height: 30),
@@ -282,147 +301,182 @@ class HomePage extends StatelessWidget {
   }
 
   static Widget manifestCard({
+    required BuildContext context,
     required IconData icon,
     required String title,
     required String subtitle,
+    required Widget page,
   }) {
 
-    return Container(
-      padding: const EdgeInsets.all(20),
+    return GestureDetector(
 
-      decoration: BoxDecoration(
-        color: const Color(0xff111827),
+      onTap: () {
 
-        borderRadius: BorderRadius.circular(28),
+        Navigator.push(
+          context,
 
-        border: Border.all(
-          color: Colors.white10,
+          MaterialPageRoute(
+            builder: (context) => page,
+          ),
+        );
+      },
+
+      child: Container(
+        padding: const EdgeInsets.all(22),
+
+        decoration: BoxDecoration(
+          color: const Color(0xff111827),
+
+          borderRadius: BorderRadius.circular(28),
+
+          border: Border.all(
+            color: Colors.white10,
+          ),
         ),
-      ),
 
-      child: Column(
-        crossAxisAlignment:
-        CrossAxisAlignment.start,
+        child: Column(
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
 
-        children: [
+          children: [
 
-          Container(
-            height: 58,
-            width: 58,
+            Container(
+              height: 58,
+              width: 58,
 
-            decoration: BoxDecoration(
-              color:
-              const Color(0xff4BE37B)
-                  .withOpacity(0.15),
+              decoration: BoxDecoration(
+                color:
+                const Color(0xff4BE37B)
+                    .withOpacity(0.15),
 
-              borderRadius:
-              BorderRadius.circular(18),
+                borderRadius:
+                BorderRadius.circular(18),
+              ),
+
+              child: Icon(
+                icon,
+                color: const Color(0xff4BE37B),
+                size: 32,
+              ),
             ),
 
-            child: Icon(
-              icon,
-              color: const Color(0xff4BE37B),
-              size: 32,
+            const Spacer(),
+
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
 
-          const Spacer(),
+            const SizedBox(height: 6),
 
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            Text(
+              subtitle,
+              maxLines: 2,
+
+              overflow:
+              TextOverflow.ellipsis,
+
+              style: const TextStyle(
+                color: Colors.white60,
+                fontSize: 13,
+                height: 1.4,
+              ),
             ),
-          ),
-
-          const SizedBox(height: 8),
-
-          Text(
-            subtitle,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-
-            style: const TextStyle(
-              color: Colors.white60,
-              fontSize: 13,
-              height: 1.4,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   static Widget challengeTile({
+    required BuildContext context,
     required IconData icon,
     required String title,
     required String subtitle,
+    required Widget page,
   }) {
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 18),
-      padding: const EdgeInsets.all(20),
+    return GestureDetector(
 
-      decoration: BoxDecoration(
-        color: const Color(0xff111827),
-        borderRadius: BorderRadius.circular(24),
-      ),
+      onTap: () {
 
-      child: Row(
-        children: [
+        Navigator.push(
+          context,
 
-          Container(
-            height: 58,
-            width: 58,
-
-            decoration: BoxDecoration(
-              color:
-              const Color(0xff4BE37B).withOpacity(0.15),
-
-              borderRadius:
-              BorderRadius.circular(18),
-            ),
-
-            child: Icon(
-              icon,
-              color: const Color(0xff4BE37B),
-            ),
+          MaterialPageRoute(
+            builder: (context) => page,
           ),
+        );
+      },
 
-          const SizedBox(width: 18),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 18),
+        padding: const EdgeInsets.all(20),
 
-          Expanded(
-            child: Column(
-              crossAxisAlignment:
-              CrossAxisAlignment.start,
+        decoration: BoxDecoration(
+          color: const Color(0xff111827),
+          borderRadius: BorderRadius.circular(24),
+        ),
 
-              children: [
+        child: Row(
+          children: [
 
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            Container(
+              height: 58,
+              width: 58,
 
-                const SizedBox(height: 6),
+              decoration: BoxDecoration(
+                color:
+                const Color(0xff4BE37B)
+                    .withOpacity(0.15),
 
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    color: Colors.white60,
-                    fontSize: 14,
-                    height: 1.5,
-                  ),
-                ),
-              ],
+                borderRadius:
+                BorderRadius.circular(18),
+              ),
+
+              child: Icon(
+                icon,
+                color: const Color(0xff4BE37B),
+              ),
             ),
-          ),
-        ],
+
+            const SizedBox(width: 18),
+
+            Expanded(
+              child: Column(
+                crossAxisAlignment:
+                CrossAxisAlignment.start,
+
+                children: [
+
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 6),
+
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 14,
+                      height: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
