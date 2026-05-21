@@ -6,7 +6,7 @@ import 'wealth_page.dart';
 import 'health_page.dart';
 import 'love_page.dart';
 import 'career_page.dart';
-
+import 'common_content_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -273,7 +273,21 @@ class HomePage extends StatelessWidget {
                 icon: Icons.check_circle,
                 title: "Morning Affirmation",
                 subtitle: "Repeat 5 positive affirmations",
-                page: const VisionBoardPage(),
+                page: const CommonContentPage(
+
+                  title: "Morning Affirmation",
+
+                  subtitle: "Positive Mindset",
+
+                  icon: Icons.check_circle,
+
+                  content:
+                  "Start your day with positive affirmations. "
+                      "Speak confidently about your goals, dreams, "
+                      "and success. Repeating affirmations daily "
+                      "helps your subconscious mind build confidence "
+                      "and attract positive energy into your life.",
+                ),
               ),
 
               challengeTile(
@@ -281,7 +295,21 @@ class HomePage extends StatelessWidget {
                 icon: Icons.psychology,
                 title: "Visualization Session",
                 subtitle: "Visualize your dream future",
-                page: const MyProgressPage(),
+                page: const CommonContentPage(
+
+                  title: "Visualization Session",
+
+                  subtitle: "Visualize Your Dream Life",
+
+                  icon: Icons.psychology,
+
+                  content:
+                  "Close your eyes and imagine your dream life "
+                      "in detail. Feel the emotions, happiness, "
+                      "and success as if it already happened. "
+                      "Visualization increases motivation and "
+                      "helps align your thoughts with your goals.",
+                ),
               ),
 
               challengeTile(
@@ -289,7 +317,21 @@ class HomePage extends StatelessWidget {
                 icon: Icons.menu_book,
                 title: "Gratitude Journal",
                 subtitle: "Write 3 things you are grateful for",
-                page: const SettingsPage(),
+                page: const CommonContentPage(
+
+                  title: "Gratitude Journal",
+
+                  subtitle: "Be Thankful Everyday",
+
+                  icon: Icons.menu_book,
+
+                  content:
+                  "Writing gratitude daily helps shift your "
+                      "mindset toward positivity and abundance. "
+                      "Appreciate small victories, supportive people, "
+                      "and beautiful experiences in your life.",
+                ),
+
               ),
 
               const SizedBox(height: 30),
